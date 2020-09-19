@@ -12,4 +12,24 @@ import domUpdates from './domUpdates';
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
-domUpdates.logIn()
+function getData() {
+  const api = new ApiFetch();
+  const travelerData = api.getTravelersData()
+  const tripData = api.getTripsData()
+  const destinationData = api.getDestinationsData();
+
+  Promise.all([travelerData, tripData, destinationData])
+    .then(data => data = {
+      travelerData: data[0].travelers,
+      tripData: data[0].trips,
+      destinationData: data[0].destinations
+    })
+    .then(getUser)
+    .then(getDate)
+    // .then(displayTrips)
+    .then(dataSets => console.log("ENDRESULT", dataSets))
+
+    // .catch(err => console.error(err))
+}
+
+getData()
