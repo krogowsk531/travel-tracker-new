@@ -1,7 +1,136 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+// $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+// ;
+//
+// body {
+//   background: $primary-background;
+// }
 
 body {
-  background: $primary-background;
+  // background: $primary-background;
+  background-image: url('https://images.unsplash.com/photo-1496950866446-3253e1470e8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');
+  // background-color: blue;
+}
+
+header {
+  // border: 2px solid black;
+  background-image: url('https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
+  border-radius: 2px;
+  color: #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+
+h2 {
+  color: #333333;
+  display: flex;
+  font-size: 40px;
+  justify-content: center;
+}
+
+h3 {
+  color: #333333;
+  font-size: 31px;
+}
+
+article {
+
+}
+// .welcome {
+//   border: 2px solid black;
+// }
+
+.trip-card {
+  background-color: #E0E0E0;
+  border: 2px solid #333333;
+  border-radius: 3px;
+  color: #333333;
+  min-height: 150px;
+  max-height: 240px;
+  margin: 5px 11px;
+  padding: 0 13px;
+  width: 195px;
+  min-width: 195px;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+
+.layout {
+  border: 2px solid #DAF7A6;
+  background-color: #7FB3D5;
+  font-weight: bold;
+  border-radius: 9px;
+  display: grid;
+  margin: 5px;
+  padding: 15px;
+}
+
+.past-trips {
+  border: 2px solid #333333;
+  font-size: 22px;
+  background-color: #FFEFE4;
+  border-radius: 4px;
+  color: #333333;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 35px;
+  min-height: 150px;
+  padding: 15px;
+}
+
+.present-trips {
+  border: 2px solid #333333;
+  font-size: 22px;
+  background-color: #FFEFE4;
+  border-radius: 4px;
+  color: #333333;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 35px;
+  min-height: 150px;
+  padding: 15px;
+}
+
+.upcoming-trips {
+  border: 2px solid #333333;
+  font-size: 22px;
+  background-color: #FFEFE4;
+  border-radius: 4px;
+  color: #333333;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 35px;
+  min-height: 150px;
+  padding: 15px;
+}
+
+.pending-trips {
+  border: 2px solid #333333;
+  font-size: 22px;
+  background-color: #FFEFE4;
+  border-radius: 4px;
+  color: #333333;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 35px;
+  min-height: 150px;
+  padding: 15px;
+}
+
+.display-box {
+  border: 2px solid #333333;
+  font-size: 22px;
 }
