@@ -9,6 +9,7 @@ import './images/turing-logo.png'
 
 // import ApiFetch from './ApiFetch';
 // import domUpdates from './domUpdates';
+import traveler from './traveler';
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
@@ -37,6 +38,7 @@ function getData() {
   Promise.all([
     // fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers'),
     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips'),
+    fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations')
 
     // fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData'),
     // fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
@@ -44,7 +46,7 @@ function getData() {
     .then(responses => Promise.all(responses.map(response => response.json())))
     .then(getUser)
     .then(getDate)
-    // .then(displayTrips)
+    .then(displayPastTrips)
     .then(data => console.log("ENDRESULT", data))
 
     // .catch(err => console.error(err))
@@ -53,7 +55,7 @@ function getData() {
 getData()
 
 function getUser(userData) {
-  // console.log("DIE", userData)
+  console.log("DIE", userData)
   // console.log("HELLO", userData[0].trips)
   //match the userID to the loginID
   const loggedInUser = 50;
@@ -80,4 +82,15 @@ function getDate(userData) {
     return acc
   }, {'past': [], 'upcoming': []})
   return day;
+}
+
+function displayPastTrips(userData) {
+  console.log("BEtTer", userData)
+  let displayPastTrips = document.querySelector('.past-trips-card')
+  displayPastTrips.innerHTML +=
+  ` <p>Madrid</p>
+    <img>IMG</img>
+    <p>${userData.past.date}</p>
+    <p>Duration</p>`
+    return displayPastTrips
 }
