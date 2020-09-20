@@ -28,7 +28,8 @@ function getData() {
     })
     .then(combineData)
     .then(getUserTrips)
-    .then(pendingTrips)
+    // .then(pendingTrips)
+    .then(presentTrips)
     .then(getDate)
     .then(displayPastTrips)
     .then(data => console.log("ENDRESULT", data))
@@ -64,19 +65,28 @@ function getUserTrips(data) {
   return matchUser
 }
 
-function pendingTrips(data) {
-  console.log('pending', data)
-  const pendingTrips = data.filter(user => {
-    return user.status === 'pending'
+// function pendingTrips(data) {
+//   console.log('pending', data)
+//   const pendingTrips = data.filter(user => {
+//     return user.status === 'pending'
+//   })
+//   console.log("PENDINGTRIPS", pendingTrips)
+//   return pendingTrips
+// }
+const currentDay = Date.now()
+
+function presentTrips(data) {
+  console.log("PRESENT", data)
+  const today = data.filter(user => {
+    return user.date.includes(currentDay)
   })
-  console.log("PENDINGTRIPS", pendingTrips)
-  return pendingTrips
+  console.log('presentTrips', today)
+  return today
 }
 
 function getDate(data) {
   console.log("Obj", data)
 
-  const currentDay = Date.now()
   const day = data.reduce((acc, trip) => {
     const pastDay = Date.parse(trip.date)
     if (currentDay < pastDay) {
