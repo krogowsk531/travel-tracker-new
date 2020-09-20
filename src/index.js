@@ -22,38 +22,36 @@ function getData() {
 
   Promise.all([travelerData, tripData, destinationData])
     .then(data => data = {
-      tripData: data[1].trips,
       travelerData: data[0].travelers,
+      tripData: data[1].trips,
       destinationData: data[2].destinations
     })
-    .then(getUser)
+    .then(combineData)
+    .then(getUserTrips)
+    .then(pendingTrips)
     .then(getDate)
-    // .then(displayTrips)
+    .then(displayPastTrips)
     .then(data => console.log("ENDRESULT", data))
 
     // .catch(err => console.error(err))
 }
 
-// function getData() {
-//   Promise.all([
-//     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips'),
-//     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers'),
-//     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations')
-//   ])
-//     .then(responses => Promise.all(responses.map(response => response.json())))
-//     .then(getUser)
-//     .then(getDate)
-//     // .then(display)
-//     // .then(displayPastTrips)
-//     .then(data => console.log("ENDRESULT", data))
-//
-//     // .catch(err => console.error(err))
-// }
-
 getData()
 
-function getUser(data) {
-  console.log("DIE", data.tripData)
+
+
+function combineData(data) {
+  console.log("DATA", data)
+  //image, duration, date, destinationName, userID
+  //return type will be an array of objects
+  //each object is an object literal with the keys on 57
+  return data
+}
+
+function getUserTrips(data) {
+  console.log("1", data.tripData)
+  console.log('2', data.travelerData)
+  console.log('3', data.destinationData)
   // console.log("HELLO", tripData[1].trips)
   // console.log("HELLO2", userData[0].destinations)
   //match the userID to the loginID
@@ -62,10 +60,18 @@ function getUser(data) {
     // console.log(user)
     return user.userID === loggedInUser
   })
-  // console.log("MATCH", matchUser)
+  console.log("MATCH", matchUser)
   return matchUser
 }
 
+function pendingTrips(data) {
+  console.log('pending', data)
+  const pendingTrips = data.filter(user => {
+    return user.status === 'pending'
+  })
+  console.log("PENDINGTRIPS", pendingTrips)
+  return pendingTrips
+}
 
 function getDate(data) {
   console.log("Obj", data)
@@ -83,6 +89,7 @@ function getDate(data) {
   return day;
 }
 
+
 // function getId() {
 //   const username = document.getElementById('username').value;
 //   if (username.includes('traveler')) {
@@ -95,14 +102,14 @@ function getDate(data) {
 //   domUpdates.displayWelcome(traveler)
 // }
 
-function displayPastTrips(userData) {
+function displayPastTrips(data) {
   // console.log("TIRED")
-  console.log("BEtTer", userData)
+  console.log("BEtTer", data)
   let displayPastTrips = document.querySelector('.past-trips-card')
   displayPastTrips.innerHTML +=
-  ` <p>${userData[2].destinations}</p>
+  ` <p>${data.past[0].destinationID}</p>
     <img>IMG</img>
-    <p>${userData[0].past.date}</p>
+    <p>${data.past[0].date}</p>
     <p>Duration</p>`
     return displayPastTrips
 }
