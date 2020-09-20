@@ -29,7 +29,7 @@ function getData() {
     .then(combineData)
     .then(getUserTrips)
     // .then(pendingTrips)
-    .then(presentTrips)
+    // .then(presentTrips)
     .then(getDate)
     .then(displayPastTrips)
     .then(data => console.log("ENDRESULT", data))
@@ -75,14 +75,14 @@ function getUserTrips(data) {
 // }
 const currentDay = Date.now()
 
-function presentTrips(data) {
-  console.log("PRESENT", data)
-  const today = data.filter(user => {
-    return user.date.includes(currentDay)
-  })
-  console.log('presentTrips', today)
-  return today
-}
+// function presentTrips(data) {
+//   console.log("PRESENT", data)
+//   const today = data.filter(user => {
+//     return user.date.includes(currentDay)
+//   })
+//   console.log('presentTrips', today)
+//   return today
+// }
 
 function getDate(data) {
   console.log("Obj", data)
