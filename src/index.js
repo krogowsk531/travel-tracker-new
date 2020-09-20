@@ -7,63 +7,86 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-import ApiFetch from './ApiFetch';
-import domUpdates from './domUpdates';
-import traveler from './traveler';
+// import ApiFetch from './ApiFetch';
+// import domUpdates from './domUpdates';
+// import traveler from './traveler';
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
-function getData() {
-  const api = new ApiFetch();
-  const tripData = api.getTripsData()
-  const travelerData = api.getTravelersData()
-  console.log("TD", travelerData)
-  const destinationData = api.getDestinationsData();
+window.addEventListener('load', onLoad);
 
-  Promise.all([travelerData, tripData, destinationData])
-    .then(data => data = {
-      travelerData: data[0].travelers,
-      tripData: data[1].trips,
-      destinationData: data[2].destinations
-    })
-    .then(combineData)
-    .then(getUserTrips)
-    // .then(pendingTrips)
-    // .then(presentTrips)
-    .then(getDate)
-    .then(displayPastTrips)
-    .then(data => console.log("ENDRESULT", data))
 
-    // .catch(err => console.error(err))
+function onLoad() {
+  enterLogin()
+
 }
 
-getData()
-
-
-
-function combineData(data) {
-  console.log("DATA", data)
-  //image, duration, date, destinationName, userID
-  //return type will be an array of objects
-  //each object is an object literal with the keys on 57
-  return data
+function enterLogin() {
+  const loginBtn = document.querySelector('.login-button')
+  loginBtn.addEventListener('click', enterLogin)
+  const username = document.getElementById('username').value
+  const password = document.getElementById('password').value
+  if (username.includes('traveler') && (username.split('traveler')[1] < 51 && username.split('traveler')[1] > 0) && password === 'travel2020') {
+    console.log(username + ' is logged in!!!')
+  } else {
+    alert("WRONG PASSWORD")
+  }
 }
 
-function getUserTrips(data) {
-  console.log("1", data.tripData)
-  console.log('2', data.travelerData)
-  console.log('3', data.destinationData)
-  // console.log("HELLO", tripData[1].trips)
-  // console.log("HELLO2", userData[0].destinations)
-  //match the userID to the loginID
-  const loggedInUser = 50;
-  const matchUser = data.tripData.filter(user => {
-    // console.log(user)
-    return user.userID === loggedInUser
-  })
-  console.log("MATCH", matchUser)
-  return matchUser
-}
+
+// function getData() {
+//   const api = new ApiFetch();
+//   const tripData = api.getTripsData()
+//   const travelerData = api.getTravelersData()
+//   console.log("TD", travelerData)
+//   const destinationData = api.getDestinationsData();
+//
+//   Promise.all([travelerData, tripData, destinationData])
+//     .then(data => data = {
+//       travelerData: data[0].travelers,
+//       tripData: data[1].trips,
+//       destinationData: data[2].destinations
+//     })
+//     // .then(combineData)
+//     // .then(getUserTrips)
+//     // .then(pendingTrips)
+//     // .then(presentTrips)
+//     // .then(getDate)
+//     // .then(displayPastTrips)
+//     .then(data => console.log("ENDRESULT", data))
+//
+//     // .catch(err => console.error(err))
+// }
+//
+// getData()
+
+// traveler.pastAndUpcomingTrips()
+
+
+
+// function combineData(data) {
+//   console.log("DATA", data)
+//   //image, duration, date, destinationName, userID
+//   //return type will be an array of objects
+//   //each object is an object literal with the keys on 57
+//   return data
+// }
+
+// function getUserTrips(data) {
+//   console.log("1", data.tripData)
+//   console.log('2', data.travelerData)
+//   console.log('3', data.destinationData)
+//   // console.log("HELLO", tripData[1].trips)
+//   // console.log("HELLO2", userData[0].destinations)
+//   //match the userID to the loginID
+//   const loggedInUser = 50;
+//   const matchUser = data.tripData.filter(user => {
+//     // console.log(user)
+//     return user.userID === loggedInUser
+//   })
+//   console.log("MATCH", matchUser)
+//   return matchUser
+// }
 
 // function pendingTrips(data) {
 //   console.log('pending', data)
@@ -73,7 +96,9 @@ function getUserTrips(data) {
 //   console.log("PENDINGTRIPS", pendingTrips)
 //   return pendingTrips
 // }
-const currentDay = Date.now()
+// const currentDay = Date.now()
+
+// let traveler = new Traveler()
 
 // function presentTrips(data) {
 //   console.log("PRESENT", data)
@@ -84,20 +109,20 @@ const currentDay = Date.now()
 //   return today
 // }
 
-function getDate(data) {
-  console.log("Obj", data)
-
-  const day = data.reduce((acc, trip) => {
-    const pastDay = Date.parse(trip.date)
-    if (currentDay < pastDay) {
-      acc.upcoming.push(trip)
-    } else {
-      acc.past.push(trip)
-    }
-    return acc
-  }, {'past': [], 'upcoming': []})
-  return day;
-}
+// function getDate(data) {
+//   console.log("Obj", data)
+//
+//   const day = data.reduce((acc, trip) => {
+//     const pastDay = Date.parse(trip.date)
+//     if (currentDay < pastDay) {
+//       acc.upcoming.push(trip)
+//     } else {
+//       acc.past.push(trip)
+//     }
+//     return acc
+//   }, {'past': [], 'upcoming': []})
+//   return day;
+// }
 
 
 // function getId() {
@@ -112,14 +137,14 @@ function getDate(data) {
 //   domUpdates.displayWelcome(traveler)
 // }
 
-function displayPastTrips(data) {
-  // console.log("TIRED")
-  console.log("BEtTer", data)
-  let displayPastTrips = document.querySelector('.past-trips-card')
-  displayPastTrips.innerHTML +=
-  ` <p>${data.past[0].destinationID}</p>
-    <img>IMG</img>
-    <p>${data.past[0].date}</p>
-    <p>Duration</p>`
-    return displayPastTrips
-}
+// function displayPastTrips(data) {
+//   // console.log("TIRED")
+//   console.log("BEtTer", data)
+//   let displayPastTrips = document.querySelector('.past-trips-card')
+//   displayPastTrips.innerHTML +=
+//   ` <p>${data.past[0].destinationID}</p>
+//     <img>IMG</img>
+//     <p>${data.past[0].date}</p>
+//     <p>Duration</p>`
+//     return displayPastTrips
+// }
