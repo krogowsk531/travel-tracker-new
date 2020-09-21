@@ -29,12 +29,21 @@ class Traveler {
     }, {'past': [], 'upcoming': []})
     return day;
   }
+  combineData() {
+    // function combineData(data) {
+    //   console.log("DATA", data)
+    //   //image, duration, date, destinationName, userID
+    //   //return type will be an array of objects
+    //   //each object is an object literal with the keys on 57
+    //   return data
+    // }
+
+  }
+  calculateTotalCost() {
+    return this.trips.filter(trip => {
+      return 
+    })
+  }
 }
 
 export default Traveler;
-
-function getDate(data) {
-  console.log("Obj", data)
-
-
-}

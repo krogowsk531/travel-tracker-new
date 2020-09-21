@@ -7,9 +7,9 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-// import ApiFetch from './ApiFetch';
-// import domUpdates from './domUpdates';
-// import traveler from './traveler';
+import ApiFetch from './ApiFetch';
+import domUpdates from './domUpdates';
+import traveler from './traveler';
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
@@ -17,48 +17,49 @@ window.addEventListener('load', onLoad);
 
 
 function onLoad() {
-  enterLogin()
+  const loginBtn = document.querySelector('.login-button')
+  loginBtn.addEventListener('click', enterLogin)
+  getData()
 
 }
 
 function enterLogin() {
-  const loginBtn = document.querySelector('.login-button')
-  loginBtn.addEventListener('click', enterLogin)
   const username = document.getElementById('username').value
   const password = document.getElementById('password').value
   if (username.includes('traveler') && (username.split('traveler')[1] < 51 && username.split('traveler')[1] > 0) && password === 'travel2020') {
     console.log(username + ' is logged in!!!')
+    //hide at this point
   } else {
     alert("WRONG PASSWORD")
   }
 }
 
 
-// function getData() {
-//   const api = new ApiFetch();
-//   const tripData = api.getTripsData()
-//   const travelerData = api.getTravelersData()
-//   console.log("TD", travelerData)
-//   const destinationData = api.getDestinationsData();
-//
-//   Promise.all([travelerData, tripData, destinationData])
-//     .then(data => data = {
-//       travelerData: data[0].travelers,
-//       tripData: data[1].trips,
-//       destinationData: data[2].destinations
-//     })
-//     // .then(combineData)
-//     // .then(getUserTrips)
-//     // .then(pendingTrips)
-//     // .then(presentTrips)
-//     // .then(getDate)
-//     // .then(displayPastTrips)
-//     .then(data => console.log("ENDRESULT", data))
-//
-//     // .catch(err => console.error(err))
-// }
-//
-// getData()
+function getData() {
+  const api = new ApiFetch();
+  const tripData = api.getTripsData()
+  const travelerData = api.getTravelersData()
+  console.log("TD", travelerData)
+  const destinationData = api.getDestinationsData();
+
+  Promise.all([travelerData, tripData, destinationData])
+    .then(data => data = {
+      travelerData: data[0].travelers,
+      tripData: data[1].trips,
+      destinationData: data[2].destinations
+    })
+    // .then(combineData)
+    .then(getUserTrips)
+    // .then(pendingTrips)
+    // .then(presentTrips)
+    // .then(getDate)
+    // .then(displayPastTrips)
+    .then(data => console.log("ENDRESULT", data))
+
+    // .catch(err => console.error(err))
+}
+
+
 
 // traveler.pastAndUpcomingTrips()
 
@@ -72,21 +73,21 @@ function enterLogin() {
 //   return data
 // }
 
-// function getUserTrips(data) {
-//   console.log("1", data.tripData)
-//   console.log('2', data.travelerData)
-//   console.log('3', data.destinationData)
-//   // console.log("HELLO", tripData[1].trips)
-//   // console.log("HELLO2", userData[0].destinations)
-//   //match the userID to the loginID
-//   const loggedInUser = 50;
-//   const matchUser = data.tripData.filter(user => {
-//     // console.log(user)
-//     return user.userID === loggedInUser
-//   })
-//   console.log("MATCH", matchUser)
-//   return matchUser
-// }
+function getUserTrips(data) {
+  console.log("1", data.tripData)
+  console.log('2', data.travelerData)
+  console.log('3', data.destinationData)
+  // console.log("HELLO", tripData[1].trips)
+  // console.log("HELLO2", userData[0].destinations)
+  //match the userID to the loginID
+  const loggedInUser = 3;
+  const matchUser = data.tripData.filter(user => {
+    // console.log(user)
+    return user.userID === loggedInUser
+  })
+  console.log("MATCH", matchUser)
+  return matchUser
+}
 
 // function pendingTrips(data) {
 //   console.log('pending', data)
