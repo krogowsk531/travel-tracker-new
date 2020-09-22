@@ -1,13 +1,13 @@
 class Traveler {
-  constructor(data) {
-    console.log("T", data)
-    this.id = data.id;
-    this.name = data.name;
-    this.travelerType = data.travelerType
-    this.trips = data.trips
-    this.destinations = data.destinations
+  constructor(name, trips) {
+    // this.id = data.id;
+    this.name = name;
+    // this.travelerType = data.travelerType
+    this.trips = trips;
+    // this.destinations = data.destinations
   }
-  presentTrips(currentDay) {
+  presentTrips() {
+    let currentDay = Date.now()
     return this.trips.filter(trip => {
       return trip.date === currentDay
     })
@@ -17,7 +17,8 @@ class Traveler {
       return trip.status.includes('pending')
     })
   }
-  pastAndUpcomingTrips(currentDay) {
+  pastAndUpcomingTrips() {
+    let currentDay = Date.now()
     const day = this.trips.reduce((acc, trip) => {
       const pastDay = Date.parse(trip.date)
       if (currentDay < pastDay) {
@@ -29,19 +30,16 @@ class Traveler {
     }, {'past': [], 'upcoming': []})
     return day;
   }
+  
   combineData() {
     // function combineData(data) {
     //   console.log("DATA", data)
-    //   //image, duration, date, destinationName, userID
-    //   //return type will be an array of objects
-    //   //each object is an object literal with the keys on 57
-    //   return data
-    // }
+
 
   }
   calculateTotalCost() {
     return this.trips.filter(trip => {
-      return 
+      return
     })
   }
 }

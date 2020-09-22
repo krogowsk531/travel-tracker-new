@@ -20,15 +20,17 @@ function onLoad() {
   const loginBtn = document.querySelector('.login-button')
   loginBtn.addEventListener('click', enterLogin)
   getData()
+  // displayPastTrips()
 
 }
 
 function enterLogin() {
   const username = document.getElementById('username').value
   const password = document.getElementById('password').value
+  const removeLogin = document.querySelector('.entry-form')
   if (username.includes('traveler') && (username.split('traveler')[1] < 51 && username.split('traveler')[1] > 0) && password === 'travel2020') {
     console.log(username + ' is logged in!!!')
-    //hide at this point
+    removeLogin.classList.add('hidden')
   } else {
     alert("WRONG PASSWORD")
   }
@@ -42,22 +44,43 @@ function getData() {
   console.log("TD", travelerData)
   const destinationData = api.getDestinationsData();
 
-  Promise.all([travelerData, tripData, destinationData])
-    .then(data => data = {
-      travelerData: data[0].travelers,
-      tripData: data[1].trips,
-      destinationData: data[2].destinations
-    })
-    // .then(combineData)
-    .then(getUserTrips)
-    // .then(pendingTrips)
-    // .then(presentTrips)
-    // .then(getDate)
-    // .then(displayPastTrips)
-    .then(data => console.log("ENDRESULT", data))
+let traveler = Promise.all([travelerData, tripData, destinationData])
+  .then(data => data = {
+    travelerData: data[0].travelers,
+    tripData: data[1].trips,
+    destinationData: data[2].destinations
+  })
+  .then(createTraveler)
+  // .then(displayPastTrips)
+  }
 
-    // .catch(err => console.error(err))
+function createTraveler(data) {
+  console.log("DATA", data)
+  let userid = 3
+  let name = data.travelerData.find(traveler => {
+    return traveler.id === userid
+  }).name
+  console.log(name)
+  let trips = data.tripData.filter(trip => {
+    return trip.userID === userid
+  })
+  let processedTrips = trips.map(trip => {
+    let destinationObj = data.destinationData.find(destination => {
+      return destination.id === trip.destinationID
+    })
+    // console.log(trip, destinationObj)
+    trip.destinationName = destinationObj.destination
+    return trip
+  })
+  console.log("DEST", data.destinationData)
+  console.log("PROCESSED", processedTrips)
+
+
+//return array of trip objects for user three
+//each trip object needs the keys above
+  return new Traveler(name, trips)
 }
+
 
 
 
@@ -81,13 +104,19 @@ function getUserTrips(data) {
   // console.log("HELLO2", userData[0].destinations)
   //match the userID to the loginID
   const loggedInUser = 3;
-  const matchUser = data.tripData.filter(user => {
+  const tripsForUser = data.tripData.filter(user => {
     // console.log(user)
     return user.userID === loggedInUser
   })
-  console.log("MATCH", matchUser)
-  return matchUser
+  console.log("MATCH", tripsForUser)
+  return tripsForUser
 }
+
+//   //image, duration, date, destinationName, userID
+//   //return type will be an array of objects
+//   //each object is an object literal with the keys on 57
+//   return data
+// }
 
 // function pendingTrips(data) {
 //   console.log('pending', data)
@@ -99,7 +128,6 @@ function getUserTrips(data) {
 // }
 // const currentDay = Date.now()
 
-// let traveler = new Traveler()
 
 // function presentTrips(data) {
 //   console.log("PRESENT", data)
@@ -138,9 +166,9 @@ function getUserTrips(data) {
 //   domUpdates.displayWelcome(traveler)
 // }
 
-// function displayPastTrips(data) {
+// function displayPastTrips() {
 //   // console.log("TIRED")
-//   console.log("BEtTer", data)
+//   console.log("BEtTer", processedTrips)
 //   let displayPastTrips = document.querySelector('.past-trips-card')
 //   displayPastTrips.innerHTML +=
 //   ` <p>${data.past[0].destinationID}</p>
