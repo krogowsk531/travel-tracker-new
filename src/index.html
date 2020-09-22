@@ -5,13 +5,94 @@
     <title>Webpack Starter Kit</title>
   </head>
   <body>
-    <article class="diplay-box">
-      <form>
-        <input id="username">
-        <input id="password">
-        <button type="button" onclick="logIn()">click me</button>
+
+    <header>
+    <h1>Travel Tracker</h1>
+    <p class="amount-spent">Amount spent on travel this year: $1000</p>
+    </header>
+    <article class="display-box">
+      <form class="entry-form">
+        <section class="login-area">
+          <label for="username">Username:</label>
+          <input id="username">
+          <label for="password">Password:</label>
+          <input id="password" type="password">
+        </section>
+        <button class="login-button" type="button">Log In</button>
       </form>
     </article>
+    <article class="trip-input-box hidden">
+      <form class="entry-form">
+        <section class="login-area">
+          <label for="date">Date:</label>
+          <input id="date">
+          <label for="duration">Duration:</label>
+          <input id="duration">
+          <label for="num-travelers">Number of Travelers:</label>
+          <input id="num-travelers">
+          <label for="destination">Destination:</label>
+          <!-- <input id="destination"> -->
+          <select name="cars" id="cars">
+            <option value="lima">Lima, Peru</option>
+            <option value="stockholm">Stockholm, Swedwen</option>
+            <option value="sydney">Sydney, Austrailia</option>
+            <option value="cartagena">Cartagena, Columbia</option>
+            <option value="madrid">Madrid, Spain</option>
+            <option value="jakarta">Jakarta, Indonesia</option>
+            <option value="paris">Paris, France</option>
+            <option value="tokyo">Tokyo, Japan</option>
+            <option value="amsterdam">Amsterdam, Netherlands</option>
+            <option value="toronto">Toronto, Japan</option>
+
+            <option value="mikonos">Mikonos, Greece</option>
+            <option value="wellington">Wellington, New Zealand</option>
+            <option value="petersburg">St. Petersburg, Russia</option>
+            <option value="marrakesh">Marrakesh, Morocco</option>
+            <option value="manila">Manila, Philippines</option>
+            <option value="bangkok">Bangkok, Thailand</option>
+            <option value="jaipur">Jaipur, India</option>
+            <option value="cape">Cape Town, South Africa</option>
+            <option value="quito">Quito, Ecuador</option>
+            <option value="miami">Miami, Florida</option>
+
+            <option value="tulum">Tulum, Mexico</option>
+            <option value="rome">Rome, Italy</option>
+            <option value="copenhagen">Copenhagen, Denmark</option>
+            <option value="vilnius">Vilnius, Lithuania</option>
+            <option value="york">New York, New York</option>
+            <option value="london">London, England</option>
+            <option value="francisco">San Francisco, California</option>
+            <option value="juan">San Juan, Puerto Rico</option>
+            <option value="willemstad">Willemstad, Curaçao</option>
+            <option value="antananarivo">Antananarivo, Madagascar</option>
+
+          </select>
+        </section>
+        <button class="login-button" type="button">Log In</button>
+      </form>
+    </article>
+    <main>
+      <section class="welcome">
+        <h2>Welcome Scott!</h2>
+      </section>
+      <section>
+        <h3>Your Trips</h3>
+        <section class="present-trips layout">Present Trips
+          <article class="trip-card present-trips-card">TRIP</article>
+        </section>
+        <section class="upcoming-trips layout">Upcoming Trips
+          <article class="trip-card upcoming-trips-card">TRIP</article>
+        </section>
+          <section class="past-trips layout">Past Trips
+            <article class="trip-card past-trips-card">
+
+            </article>
+          </section>
+          <section class="pending-trips layout">Pending Trips
+          <article class="trip-card pending-trips-card">TRIP</article>
+          </section>
+      </section>
+    </main>
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
 
