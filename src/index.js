@@ -28,7 +28,7 @@ function enterLogin() {
   const username = document.getElementById('username').value
   const password = document.getElementById('password').value
   const loginValue = parseInt(username.match(/\d+/gi).pop())
-  console.log("VALUE", loginValue)
+  // console.log("VALUE", loginValue)
   const removeLogin = document.querySelector('.entry-form')
   if (username.includes('traveler') && (username.split('traveler')[1] < 51 && username.split('traveler')[1] > 0) && password === 'travel2020') {
     console.log(username + ' is logged in!!!')
@@ -63,13 +63,14 @@ let traveler = Promise.all([travelerData, tripData, destinationData])
     destinationData: data[2].destinations
   })
   .then(_createTraveler)
-  // .then(displayPastTrips)
+  .then(displayPastTrips)
   }
 
 function createTraveler(data, loginValue) {
+  console.log(typeof data)
   console.log("DATA", data)
   let userid = loginValue
-  console.log(data.travelerData)
+  // console.log(data.travelerData)
   console.log(userid)
   let name = data.travelerData.find(traveler => {
 
@@ -86,7 +87,7 @@ function createTraveler(data, loginValue) {
     trip.destinationName = destinationObj.destination
     return trip
   })
-  console.log("DEST", data.destinationData)
+  // console.log("DEST", data.destinationData)
   console.log("PROCESSED", processedTrips)
 
 
@@ -182,10 +183,10 @@ function createTraveler(data, loginValue) {
 
 // function displayPastTrips() {
 //   // console.log("TIRED")
-//   console.log("BEtTer", processedTrips)
+//   // console.log("BEtTer", processedTrips)
 //   let displayPastTrips = document.querySelector('.past-trips-card')
 //   displayPastTrips.innerHTML +=
-//   ` <p>${data.past[0].destinationID}</p>
+//   ` <p>${this.createTraveler()}</p>
 //     <img>IMG</img>
 //     <p>${data.past[0].date}</p>
 //     <p>Duration</p>`
