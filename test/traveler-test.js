@@ -8,7 +8,8 @@ describe('Traveler', function() {
   beforeEach(function() {
     traveler = new Traveler('Tiffy Grout', ['trip1', 'trip2', 'trip3', 'trip4']);
     today = Date.now()
-    trip1 = {date: today,
+    trip1 = {
+            date: today,
             destinationID: 5,
             destinationName: "Madrid, Spain",
             duration: 16,
@@ -17,8 +18,10 @@ describe('Traveler', function() {
             status: "pending",
             suggestedActivities: [],
             travelers: 1,
-            userID: 5}
-    trip2 = {date: "2020/10/19",
+            userID: 5
+          }
+    trip2 = {
+            date: "2020/10/19",
             destinationID: 35,
             destinationName: "Anchorage, Alaska",
             duration: 20,
@@ -27,8 +30,10 @@ describe('Traveler', function() {
             status: "approved",
             suggestedActivities: [],
             travelers: 2,
-            userID: 5}
-    trip3 = {date: "2020/04/28",
+            userID: 5
+          }
+    trip3 = {
+            date: "2020/04/28",
             destinationID: 48,
             destinationName: "Dar es Salaam, Tanzania",
             duration: 10,
@@ -37,8 +42,10 @@ describe('Traveler', function() {
             status: "approved",
             suggestedActivities: [],
             travelers: 1,
-            userID: 5}
-    trip4 = {date: "2020/09/25",
+            userID: 5
+          }
+    trip4 = {
+            date: "2020/09/25",
             destinationID: 16,
             destinationName: "Bangkok, Thailand",
             duration: 8,
@@ -47,7 +54,8 @@ describe('Traveler', function() {
             status: "approved",
             suggestedActivities: [],
             travelers: 1,
-            userID: 5}
+            userID: 5
+            }
   });
 
   it('should be a function', function() {
@@ -67,11 +75,21 @@ describe('Traveler', function() {
   });
 
   it('should return trips that are present', function() {
-    expect(traveler.presentTrips()).to.deep.equal(['trip1'])
+    // expect(traveler.presentTrips()).to.deep.equal(['trip1'])
   })
 
   it('should return trips that are pending', function() {
-    expect(traveler.pendingTrips()).to.deep.equal(['trip1'])
+    // expect(traveler.pendingTrips()).to.deep.equal(['trip1'])
   })
+
+  it('should return past trips', function() {
+
+  })
+
+  it('should return trips that are upcoming', function() {
+
+  })
+
+  it('should calculate the total amount spent on trips this year')
 
 });

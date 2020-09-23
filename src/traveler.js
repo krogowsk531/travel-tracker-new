@@ -3,7 +3,7 @@ class Traveler {
     this.name = name;
     this.trips = trips;
   }
-  
+
   presentTrips() {
     let currentDay = Date.now()
     return this.trips.filter(trip => {
@@ -29,6 +29,9 @@ class Traveler {
       let pastDay = Date.parse(trip.date)
       return pastDay > currentDay
     })
+  }
+  calculateTotalCost() {
+    
   }
 }
 

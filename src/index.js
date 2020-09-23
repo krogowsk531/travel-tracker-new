@@ -19,9 +19,6 @@ window.addEventListener('load', onLoad);
 function onLoad() {
   const loginBtn = document.querySelector('.login-button')
   loginBtn.addEventListener('click', enterLogin)
-
-  // displayPastTrips()
-
 }
 
 function enterLogin() {
@@ -34,17 +31,10 @@ function enterLogin() {
     console.log(username + ' is logged in!!!')
     removeLogin.classList.add('hidden')
     getData(loginValue)
-    // displayPastTrips()
   } else {
     alert("WRONG PASSWORD")
   }
-
 }
-
-//get the value of username
-
-// var str = "traveler50";
-// var res = str.match(/\d+/gi);
 
 
 function getData(loginValue) {
@@ -57,16 +47,16 @@ function getData(loginValue) {
     return createTraveler(data, loginValue)
   }
 
-let traveler = Promise.all([travelerData, tripData, destinationData])
-  .then(data => data = {
-    travelerData: data[0].travelers,
-    tripData: data[1].trips,
-    destinationData: data[2].destinations
-  })
-  .then(_createTraveler)
-  // .then(displayTravelerPage)
-  .then(displayHTML)
-  // .then(displayGreeting)
+  let traveler = Promise.all([travelerData, tripData, destinationData])
+    .then(data => data = {
+      travelerData: data[0].travelers,
+      tripData: data[1].trips,
+      destinationData: data[2].destinations
+    })
+    .then(_createTraveler)
+    // .then(displayTravelerPage)
+    .then(displayHTML)
+    // .then(displayGreeting)
 }
 
 // function postData()
@@ -109,97 +99,8 @@ function createTraveler(data, loginValue) {
   // console.log("DEST", data.destinationData)
   console.log("PROCESSED", processedTrips)
   console.log("NAME", name)
-
-
-//return array of trip objects for user three
-//each trip object needs the keys above
   return new Traveler(name, processedTrips)
 }
-
-
-
-
-// traveler.pastAndUpcomingTrips()
-
-
-
-// function combineData(data) {
-//   console.log("DATA", data)
-//   //image, duration, date, destinationName, userID
-//   //return type will be an array of objects
-//   //each object is an object literal with the keys on 57
-//   return data
-// }
-
-// function getUserTrips(data) {
-//   console.log("1", data.tripData)
-//   console.log('2', data.travelerData)
-//   console.log('3', data.destinationData)
-//   // console.log("HELLO", tripData[1].trips)
-//   // console.log("HELLO2", userData[0].destinations)
-//   //match the userID to the loginID
-//   const loggedInUser = 3;
-//   const tripsForUser = data.tripData.filter(user => {
-//     // console.log(user)
-//     return user.userID === loggedInUser
-//   })
-//   console.log("MATCH", tripsForUser)
-//   return tripsForUser
-// }
-
-//   //image, duration, date, destinationName, userID
-//   //return type will be an array of objects
-//   //each object is an object literal with the keys on 57
-//   return data
-// }
-
-// function pendingTrips(data) {
-//   console.log('pending', data)
-//   const pendingTrips = data.filter(user => {
-//     return user.status === 'pending'
-//   })
-//   console.log("PENDINGTRIPS", pendingTrips)
-//   return pendingTrips
-// }
-// const currentDay = Date.now()
-
-
-// function presentTrips(data) {
-//   console.log("PRESENT", data)
-//   const today = data.filter(user => {
-//     return user.date.includes(currentDay)
-//   })
-//   console.log('presentTrips', today)
-//   return today
-// }
-
-// function getDate(data) {
-//   console.log("Obj", data)
-//
-//   const day = data.reduce((acc, trip) => {
-//     const pastDay = Date.parse(trip.date)
-//     if (currentDay < pastDay) {
-//       acc.upcoming.push(trip)
-//     } else {
-//       acc.past.push(trip)
-//     }
-//     return acc
-//   }, {'past': [], 'upcoming': []})
-//   return day;
-// }
-
-
-// function getId() {
-//   const username = document.getElementById('username').value;
-//   if (username.includes('traveler')) {
-//     const travelerID = Number(username.split('traveler')[1]);
-//     return Number(travelerID);
-//   }
-// }
-
-
-
-
 
 function displayHTML(traveler) {
   console.log("HE", traveler)
@@ -207,7 +108,8 @@ function displayHTML(traveler) {
   let displayPastTrips = document.querySelector('.past-trips-card')
   pastTrips.forEach(trip => {
     displayPastTrips.innerHTML +=
-    ` <p>${trip.destinationName}</p>
+    `
+    <p>${trip.destinationName}</p>
     <div class="image-container">
     <img src="${trip.img}" class="image">
     </div>
@@ -240,7 +142,8 @@ function displayHTML(traveler) {
   let displayUpcomingTrips = document.querySelector('.upcoming-trips-card')
   upcomingTrips.forEach(trip => {
     displayUpcomingTrips.innerHTML +=
-    ` <p>${trip.destinationName}</p>
+    `
+    <p>${trip.destinationName}</p>
     <div class="image-container">
     <img src="${trip.img}" class="image">
     </div>
@@ -253,22 +156,3 @@ function displayHTML(traveler) {
   moneySpent.classList.remove('hidden')
   greeting.innerHTML = `Welcome, ${traveler.name}!`
 }
-
-// function displayUpcomingTrips(traveler) {
-//   console.log("HE", traveler)
-//   // console.log("TRIPARRAY", tripArray)
-//   // console.log("TIRED")
-//   // console.log("BEtTer", processedTrips)
-//   let upcomingTrips = traveler.upcomingTrips();
-//   let displayUpcomingTrips = document.querySelector('.upcoming-trips-card')
-//   pastTrips.forEach(trip => {
-//     displayUpcomingTrips.innerHTML +=
-//     ` <p>${trip.destinationName}</p>
-//     <div class="image-container">
-//     <img src="${trip.img}" class="image">
-//     </div>
-//     <p>Date: ${trip.date}</p>
-//     <p class="duration">${trip.duration} days</p>`
-//     // return displayPastTrips
-//   })
-// }

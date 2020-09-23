@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 /* This is an example of using Sass, otherwise plain CSS works too*/
 // $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
 // ;
@@ -7,13 +9,10 @@
 // }
 
 body {
-  // background: $primary-background;
   background-image: url('https://images.unsplash.com/photo-1496950866446-3253e1470e8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');
-  // background-color: blue;
 }
 
 header {
-  // border: 2px solid black;
   background-image: url('https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
   border-radius: 2px;
   color: #e6e6e6;
@@ -25,14 +24,14 @@ header {
 }
 
 h2 {
-  color: #333333;
+  color: $dark-grey;
   display: flex;
   font-size: 40px;
   justify-content: center;
 }
 
 label {
-  font-weight: 600;
+  font-weight: $bold-level;
 }
 
 span {
@@ -45,10 +44,10 @@ button {
   height: 30px;
   width: 80px;
   border-radius: 1px;
-  border: 1px solid #333333;
-  color: #333333;
-  font-weight: 600;
-  background-color: #E0E0E0;
+  border: 1px solid $dark-grey;
+  color: $dark-grey;
+  font-weight: $bold-level;
+  background-color: $light-grey-background;
   font-family: "Quicksand", sans-serif;
   outline: none;
 
@@ -57,7 +56,7 @@ button {
 input {
   height: 30px;
   padding: 0;
-  border: 1px solid #333333;
+  border: 1px solid $dark-grey;
   border-radius: 1px;
   padding-left: 5px;
   outline: none;
@@ -89,9 +88,9 @@ p {
 }
 
 .entry-form {
-  border: 2px solid #333333;
-  background-color: #FFEFE4;
-  border-radius: 4px;
+  border: 2px solid $dark-grey;
+  background-color: $light-peach;
+  border-radius: $standard-border-radius;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -102,18 +101,14 @@ p {
   position: relative;
   width: 55%;
   z-index: 2;
-
-
-flex-flow: row wrap;
-
+  flex-flow: row wrap;
 }
 
-
 .trip-card {
-  background-color: #E0E0E0;
-  border: 2px solid #333333;
+  background-color: $light-grey-background;
+  border: 2px solid $dark-grey;
   border-radius: 3px;
-  color: #333333;
+  color: $dark-grey;
   min-height: 150px;
   max-height: 295px;
   margin: 5px 11px;
@@ -127,28 +122,25 @@ flex-flow: row wrap;
 }
 
 .your-trips {
-  color: #333333;
+  color: $dark-grey;
   font-size: 31px;
-  font-weight: 600px;
+  font-weight: $bold-level;
 }
 
 
 .layout {
-  border: 2px solid #DAF7A6;
-  background-color: #7FB3D5;
   font-weight: bold;
-  border-radius: 9px;
-  display: grid;
-  margin: 5px;
-  padding: 15px;
+  flex-grow: 3;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .past-trips {
-  border: 2px solid #333333;
+  border: 2px solid $dark-grey;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  background-color: $light-peach;
+  border-radius: $standard-border-radius;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -159,11 +151,11 @@ flex-flow: row wrap;
 }
 
 .present-trips {
-  border: 2px solid #333333;
+  border: 2px solid $dark-grey;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  background-color: $light-peach;
+  border-radius: $standard-border-radius;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -174,11 +166,11 @@ flex-flow: row wrap;
 }
 
 .upcoming-trips {
-  border: 2px solid #333333;
+  border: 2px solid $dark-grey;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  background-color: $light-peach;
+  border-radius: $standard-border-radius;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -189,11 +181,11 @@ flex-flow: row wrap;
 }
 
 .pending-trips {
-  border: 2px solid #333333;
+  border: 2px solid $dark-grey;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  background-color: $light-peach;
+  border-radius: $standard-border-radius;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
