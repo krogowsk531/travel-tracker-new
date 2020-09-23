@@ -31,21 +31,9 @@ h2 {
   justify-content: center;
 }
 
-h3 {
-  color: #333333;
-  font-size: 31px;
-}
-
-article {
-
-}
-
 label {
   font-weight: 600;
 }
-// .welcome {
-//   border: 2px solid black;
-// }
 
 span {
   display: block;
@@ -136,6 +124,12 @@ flex-flow: row wrap;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.your-trips {
+  color: #333333;
+  font-size: 31px;
+  font-weight: 600px;
 }
 
 

@@ -197,14 +197,9 @@ function createTraveler(data, loginValue) {
 //   }
 // }
 
-// function display(traveler) {
-//   domUpdates.displayWelcome(traveler)
-// }
 
-// function displayTravelerPage(traveler) {
-//   const welcome = document.querySelector('.welcome');
-//   return welcome.innerText += `Welcome ${traveler.name.split(" ")[0]}!`
-// }
+
+
 
 function displayHTML(traveler) {
   console.log("HE", traveler)
@@ -253,7 +248,9 @@ function displayHTML(traveler) {
     <p class="duration">${trip.duration} days</p>`
   })
   let greeting = document.querySelector('.welcome')
+  let moneySpent = document.querySelector('.amount-spent')
   greeting.classList.remove('hidden')
+  moneySpent.classList.remove('hidden')
   greeting.innerHTML = `Welcome, ${traveler.name}!`
 }
 
