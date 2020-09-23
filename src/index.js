@@ -253,6 +253,7 @@ function displayHTML(traveler) {
     <p class="duration">${trip.duration} days</p>`
   })
   let greeting = document.querySelector('.welcome')
+  greeting.classList.remove('hidden')
   greeting.innerHTML = `Welcome, ${traveler.name}!`
 }
 
