@@ -1,11 +1,13 @@
 const domUpdates = {
 
 
-  // displayWelcome(traveler) {
-  //   console.log("T", traveler)
-  //    const welcome = document.querySelector('.welcome');
-  //    return welcome.innerHTML += `Welcome ${traveler.user.name.split(" ")[0]}!`;
-  //  },
+  displayWelcome(traveler) {
+    console.log("T", traveler)
+     const welcome = document.querySelector('.welcome');
+     return welcome.innerText += `Welcome ${traveler.user.name.split(" ")[0]}!`;
+   },
+
+   // document.querySelector('.welcome-banner').innerText = `Welcome ${user.name}!`;
 
   displayTravelerCosts(theTraveler) {
    const amountSpent = document.querySelector('.amount-spent')

@@ -34,6 +34,7 @@ function enterLogin() {
     console.log(username + ' is logged in!!!')
     removeLogin.classList.add('hidden')
     getData(loginValue)
+    // displayPastTrips()
   } else {
     alert("WRONG PASSWORD")
   }
@@ -53,7 +54,7 @@ function getData(loginValue) {
   console.log("TD", travelerData)
   const destinationData = api.getDestinationsData();
   function _createTraveler(data) {
-    createTraveler(data, loginValue)
+    return createTraveler(data, loginValue)
   }
 
 let traveler = Promise.all([travelerData, tripData, destinationData])
@@ -63,8 +64,25 @@ let traveler = Promise.all([travelerData, tripData, destinationData])
     destinationData: data[2].destinations
   })
   .then(_createTraveler)
-  .then(displayPastTrips)
-  }
+  // .then(displayTravelerPage)
+  .then(displayHTML)
+  // .then(displayGreeting)
+}
+
+// function postData()
+
+// function postData(directory, body) {
+//   const root = 'https://fe-apps.herokuapp.com/api/v1/fitlit/1908/'
+//   fetch(root + directory, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(body),
+//   })
+//     .then(response => console.log(response.status))
+//     .catch(err => console.error(err))
+// }
 
 function createTraveler(data, loginValue) {
   console.log(typeof data)
@@ -84,16 +102,18 @@ function createTraveler(data, loginValue) {
       return destination.id === trip.destinationID
     })
     // console.log(trip, destinationObj)
+    trip.img = destinationObj.image
     trip.destinationName = destinationObj.destination
     return trip
   })
   // console.log("DEST", data.destinationData)
   console.log("PROCESSED", processedTrips)
+  console.log("NAME", name)
 
 
 //return array of trip objects for user three
 //each trip object needs the keys above
-  return new Traveler(name, trips)
+  return new Traveler(name, processedTrips)
 }
 
 
@@ -181,14 +201,76 @@ function createTraveler(data, loginValue) {
 //   domUpdates.displayWelcome(traveler)
 // }
 
-// function displayPastTrips() {
+// function displayTravelerPage(traveler) {
+//   const welcome = document.querySelector('.welcome');
+//   return welcome.innerText += `Welcome ${traveler.name.split(" ")[0]}!`
+// }
+
+function displayHTML(traveler) {
+  console.log("HE", traveler)
+  let pastTrips = traveler.pastTrips();
+  let displayPastTrips = document.querySelector('.past-trips-card')
+  pastTrips.forEach(trip => {
+    displayPastTrips.innerHTML +=
+    ` <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>`
+  })
+  let presentTrips = traveler.presentTrips();
+  let displayPresentTrips = document.querySelector('.present-trips-card')
+  presentTrips.forEach(trip => {
+    displayPresentTrips.innerHTML +=
+    ` <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>`
+  })
+  let pendingTrips = traveler.pendingTrips();
+  let displayPendingTrips = document.querySelector('.pending-trips-card')
+  pendingTrips.forEach(trip => {
+    displayPendingTrips.innerHTML +=
+    ` <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>`
+  })
+  let upcomingTrips = traveler.upcomingTrips();
+  let displayUpcomingTrips = document.querySelector('.upcoming-trips-card')
+  upcomingTrips.forEach(trip => {
+    displayUpcomingTrips.innerHTML +=
+    ` <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>`
+  })
+  let greeting = document.querySelector('.welcome')
+  greeting.innerHTML = `Welcome, ${traveler.name}!`
+}
+
+// function displayUpcomingTrips(traveler) {
+//   console.log("HE", traveler)
+//   // console.log("TRIPARRAY", tripArray)
 //   // console.log("TIRED")
 //   // console.log("BEtTer", processedTrips)
-//   let displayPastTrips = document.querySelector('.past-trips-card')
-//   displayPastTrips.innerHTML +=
-//   ` <p>${this.createTraveler()}</p>
-//     <img>IMG</img>
-//     <p>${data.past[0].date}</p>
-//     <p>Duration</p>`
-//     return displayPastTrips
+//   let upcomingTrips = traveler.upcomingTrips();
+//   let displayUpcomingTrips = document.querySelector('.upcoming-trips-card')
+//   pastTrips.forEach(trip => {
+//     displayUpcomingTrips.innerHTML +=
+//     ` <p>${trip.destinationName}</p>
+//     <div class="image-container">
+//     <img src="${trip.img}" class="image">
+//     </div>
+//     <p>Date: ${trip.date}</p>
+//     <p class="duration">${trip.duration} days</p>`
+//     // return displayPastTrips
+//   })
 // }
