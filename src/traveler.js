@@ -2,8 +2,6 @@ class Traveler {
   constructor(name, trips) {
     this.name = name;
     this.trips = trips;
-    console.log("FOR", trips)
-    //array of trip objects
   }
 
   presentTrips() {
