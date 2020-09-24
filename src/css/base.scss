@@ -1,14 +1,6 @@
 @import "variables.scss";
 @import "mixins.scss";
 
-/* This is an example of using Sass, otherwise plain CSS works too*/
-// $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-// ;
-//
-// body {
-//   background: $primary-background;
-// }
-
 body {
   background-image: url('https://images.unsplash.com/photo-1496950866446-3253e1470e8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');
 }
@@ -25,10 +17,9 @@ header {
 }
 
 h2 {
+  @include center;
   color: $dark-grey;
-  display: flex;
   font-size: 40px;
-  justify-content: center;
 }
 
 label {
@@ -36,27 +27,20 @@ label {
 }
 
 button {
-  height: 30px;
+  @include thin-border;
   width: 15em;
-  border-radius: 1px;
-  border: 1px solid $dark-grey;
   color: $dark-grey;
   font-weight: $bold-level;
   background-color: $light-grey-background;
   font-family: "Quicksand", sans-serif;
-  outline: none;
   margin-bottom: 2em;
-
 }
 
 input {
-  height: 30px;
+  @include thin-border;
   padding: 0;
-  border: 1px solid $dark-grey;
-  border-radius: 1px;
   padding-left: 5px;
-  outline: none;
-  width: 18em;
+  width: 20em;
 }
 
 p {
@@ -64,16 +48,11 @@ p {
 }
 
 #destination {
-  height: 30px;
-  outline: none;
-  border: 1px solid $dark-grey;
-  border-radius: 1px;
+  @include thin-border;
 }
 
 .image-container {
   align-items: center;
-  display: flex;
-  justify-content: center;
   position: relative;
   z-index: 5;
 }
@@ -92,13 +71,10 @@ p {
 }
 
 .entry-form {
-  border: 2px solid $dark-grey;
-  background-color: $light-peach;
-  border-radius: $standard-border-radius;
-  display: flex;
+  @include center;
+  @include form-styling;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
   max-width: 70%;
   height: 400px;
   margin-top: 80px;
@@ -140,10 +116,8 @@ p {
 }
 
 .past-trips {
-  border: 2px solid $dark-grey;
+  @include form-styling;
   font-size: 22px;
-  background-color: $light-peach;
-  border-radius: $standard-border-radius;
   color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
@@ -155,10 +129,8 @@ p {
 }
 
 .present-trips {
-  border: 2px solid $dark-grey;
+  @include form-styling;
   font-size: 22px;
-  background-color: $light-peach;
-  border-radius: $standard-border-radius;
   color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
@@ -170,10 +142,8 @@ p {
 }
 
 .upcoming-trips {
-  border: 2px solid $dark-grey;
+  @include form-styling;
   font-size: 22px;
-  background-color: $light-peach;
-  border-radius: $standard-border-radius;
   color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
@@ -185,10 +155,8 @@ p {
 }
 
 .pending-trips {
-  border: 2px solid $dark-grey;
+  @include form-styling;
   font-size: 22px;
-  background-color: $light-peach;
-  border-radius: $standard-border-radius;
   color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
@@ -200,8 +168,7 @@ p {
 }
 
 .display-box {
-  display: flex;
-  justify-content: center;
+  @include center;
   width: 100vw;
   height: 70vh;
 }
@@ -233,16 +200,13 @@ p {
 }
 
 .trip-input-box {
-  display: flex;
-  justify-content: center;
+  @include center;
   width: 100vw;
   height: 70vh;
 }
 
 .trip-entry-form {
-  border: 2px solid $dark-grey;
-  background-color: $light-peach;
-  border-radius: $standard-border-radius;
+  @include form-styling;
   align-items: center;
   flex-direction: column;
   justify-content: center;
