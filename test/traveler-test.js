@@ -4,12 +4,11 @@ const expect = chai.expect;
 import Traveler from '../src/traveler.js';
 
 describe('Traveler', function() {
-  let traveler, trip1, trip2, trip3, trip4, today;
+  let traveler, trip1, trip2, trip3, trip4;
   beforeEach(function() {
     traveler = new Traveler('Tiffy Grout', ['trip1', 'trip2', 'trip3', 'trip4']);
-    today = Date.now()
     trip1 = {
-            date: today,
+            date: '2020/09/24',
             destinationID: 5,
             destinationName: "Madrid, Spain",
             duration: 16,
@@ -75,21 +74,18 @@ describe('Traveler', function() {
   });
 
   it('should return trips that are present', function() {
-    // expect(traveler.presentTrips()).to.deep.equal(['trip1'])
+    expect(traveler.presentTrips()).to.deep.equal(['trip1'])
   })
 
   it('should return trips that are pending', function() {
-    // expect(traveler.pendingTrips()).to.deep.equal(['trip1'])
+    expect(traveler.pendingTrips()).to.deep.equal(['trip1'])
   })
 
   it('should return past trips', function() {
-
+    expect(traveler.pastTrips()).to.deep.equal(['trip3'])
   })
 
   it('should return trips that are upcoming', function() {
-
+    expect(traveler.trips).to.deep.equal(['trip2', 'trip4'])
   })
-
-  it('should calculate the total amount spent on trips this year')
-
 });

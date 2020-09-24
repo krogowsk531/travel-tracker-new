@@ -2,6 +2,8 @@ class Traveler {
   constructor(name, trips) {
     this.name = name;
     this.trips = trips;
+    console.log("FOR", trips)
+    //array of trip objects
   }
 
   presentTrips() {
@@ -39,15 +41,6 @@ class Traveler {
       return trip.date.includes('2020')
     })
   }
-
-  // costOfTripsThisYear() {
-  //   let thisYearsTrips = this.tripsThisYear()
-  //   return thisYearsTrips.reduce((acc, trip) => {
-  //     acc += trip.destinations.estimatedLodgingCostPerDay
-  //     acc += trip.travelers * trip.destination.estimatedFlightCostPerPerson
-  //     return acc
-  //   }, 0)
-  // }
 }
 
 export default Traveler;

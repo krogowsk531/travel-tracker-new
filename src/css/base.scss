@@ -105,6 +105,7 @@ p {
   color: $dark-grey;
   font-size: 31px;
   font-weight: $bold-level;
+  text-shadow: 1px 1px;
 }
 
 
@@ -229,4 +230,31 @@ p {
 
 .flex {
   display: flex;
+}
+
+.welcome {
+  text-shadow: 1px 1px;
+  margin-top: 53px;
+}
+
+.scroll {
+  font-style: italic;
+  font-weight: bolder;
+  font-size: 23px;
+  color: #ffb158;
+}
+
+@media only screen and (max-width: 525px) {
+  input {
+    width: 10em;
+  }
+  button {
+    width: 10em;
+  }
+  #destination {
+    width: 10em;
+  }
+  .your-trips {
+    color: #e6e6e6
+  }
 }

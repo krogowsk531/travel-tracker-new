@@ -32,12 +32,14 @@ function enterLogin() {
   // console.log("VALUE", loginValue)
   const removeLogin = document.querySelector('.entry-form')
   const addForm = document.querySelector('.trip-entry-form')
+  const text = document.querySelector('.scroll')
   // addForm.classList.add('hidden')
   if (username.includes('traveler') && (username.split('traveler')[1] < 51 && username.split('traveler')[1] > 0) && password === 'travel2020') {
     console.log(username + ' is logged in!!!')
     removeLogin.classList.add('hidden')
     addForm.classList.remove('hidden')
     addForm.classList.add('flex')
+    text.classList.remove('hidden')
     getData(userID)
   } else {
     alert("WRONG PASSWORD")
@@ -265,9 +267,6 @@ function costOfRequestedTrip(apiResponse) {
   return totalCost
 }
 
-function displayCostofTrip(apiResponse) {
-
-}
 // function numbersOnlyDuration(event) {
 //   let numbersDuration = document.getElementById('duration')
 //   numbersDuration.addEventListener('keypress', numbersOnlyDuration);
