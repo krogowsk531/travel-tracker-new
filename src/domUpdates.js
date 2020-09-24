@@ -1,15 +1,11 @@
+// let amountSpentThisYear = document.querySelector('.amount-spent')
+
 const domUpdates = {
 
-
- //  displayTravelerCosts(traveler) {
- //   const amountSpent = document.querySelector('.amount-spent')
- //   const costDetails = theTraveler.calculateTotalCost();
- //   const formattedCostDetails = costDetails.map(detail => this.getCostFormat('Total Spent YTD', detail)).join('');
- //   costInfoSection.innerHTML = formattedCostDetails;
- // }
-
-
-  }
+ //  showAmountSpentInAYear(traveler) {
+ //   amountSpentThisYear.innerText = `Amount spent on travel this year: ${traveler.costOfTripsThisYear()}`
+ // },
+}
 
 
 

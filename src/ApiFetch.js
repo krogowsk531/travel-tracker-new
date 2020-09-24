@@ -18,19 +18,21 @@ class ApiFetch {
     return fetch(url).then(response => response.json())
   }
 
-  // postNewTripData(trip) {
-  //   let url = `${this.root}/trips/trips`
-  //   return fetch(url, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(trip)
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => console.log(data))
-  //   // .catch(err => console.log(err))
-  // }
+  postTripRequest(tripDetails) {
+  console.log("MORNING", tripDetails)
+  let url = `${this.root}/trips/trips`;
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(tripDetails),
+  })
+    .then(response => response.json())
+    .catch(err => console.log(err.message));
+}
+
+  
 }
 
 export default ApiFetch;
