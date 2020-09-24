@@ -30,9 +30,7 @@ class ApiFetch {
   })
     .then(response => response.json())
     .catch(err => console.log(err.message));
-}
-
-  
+  }
 }
 
 export default ApiFetch;

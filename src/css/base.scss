@@ -108,7 +108,6 @@ p {
   text-shadow: 1px 1px;
 }
 
-
 .layout {
   font-weight: bold;
   flex-grow: 3;
@@ -245,15 +244,19 @@ p {
 }
 
 @media only screen and (max-width: 525px) {
+
   input {
     width: 10em;
   }
+
   button {
     width: 10em;
   }
+
   #destination {
     width: 10em;
   }
+  
   .your-trips {
     color: #e6e6e6
   }
