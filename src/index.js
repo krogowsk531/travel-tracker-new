@@ -258,7 +258,7 @@ function costOfRequestedTrip(apiResponse) {
   let estimatedFlightCostPerPerson = destinationObj.estimatedFlightCostPerPerson
   let costOfTripNoFee = duration * estimatedLodgingCostPerDay + travelers * estimatedFlightCostPerPerson
   let agentFee = costOfTripNoFee * .10
-  let totalCost = costOfTripNoFee + agentFee
+  let totalCost = (costOfTripNoFee + agentFee).toFixed(2)
   let estimatedTripCost = document.querySelector('.cost-of-trip')
   estimatedTripCost.classList.remove('hidden')
   estimatedTripCost.innerHTML = `***Estimated Trip Cost: $${totalCost}***`
