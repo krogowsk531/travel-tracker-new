@@ -1,0 +1,17 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin thin-border {
+  border-radius: 1px;
+  border: 1px solid $dark-grey;
+  height: 30px;
+  outline: none;
+}
+
+@mixin form-styling {
+  border: 2px solid $dark-grey;
+  background-color: $light-peach;
+  border-radius: $standard-border-radius;
+}

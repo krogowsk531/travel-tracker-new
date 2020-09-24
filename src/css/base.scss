@@ -1,19 +1,11 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-// $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-// ;
-//
-// body {
-//   background: $primary-background;
-// }
+@import "variables.scss";
+@import "mixins.scss";
 
 body {
-  // background: $primary-background;
   background-image: url('https://images.unsplash.com/photo-1496950866446-3253e1470e8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');
-  // background-color: blue;
 }
 
 header {
-  // border: 2px solid black;
   background-image: url('https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
   border-radius: 2px;
   color: #e6e6e6;
@@ -25,84 +17,80 @@ header {
 }
 
 h2 {
-  color: #333333;
-  display: flex;
+  @include center;
+  color: $dark-grey;
   font-size: 40px;
-  justify-content: center;
-}
-
-h3 {
-  color: #333333;
-  font-size: 31px;
-}
-
-article {
-
 }
 
 label {
-  font-weight: 600;
-}
-// .welcome {
-//   border: 2px solid black;
-// }
-
-span {
-  display: block;
-  overflow: hidden;
-  padding: 0px 4px 0px 6px;
+  font-weight: $bold-level;
 }
 
 button {
-  height: 30px;
-  width: 80px;
-  border-radius: 1px;
-  border: 1px solid #333333;
-  color: #333333;
-  font-weight: 600;
-  background-color: #E0E0E0;
+  @include thin-border;
+  width: 15em;
+  color: $dark-grey;
+  font-weight: $bold-level;
+  background-color: $light-grey-background;
   font-family: "Quicksand", sans-serif;
-  outline: none;
-
+  margin-bottom: 2em;
 }
 
 input {
-  height: 30px;
+  @include thin-border;
   padding: 0;
-  border: 1px solid #333333;
-  border-radius: 1px;
   padding-left: 5px;
-  outline: none;
+  width: 20em;
+}
+
+p {
+  margin: .3em;
+}
+
+#destination {
+  @include thin-border;
+}
+
+.image-container {
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.image {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 7px;
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+  height: 117px;
+  transition: .8s ease;
+  width: 100%;
 }
 
 .entry-form {
-  border: 2px solid #333333;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  display: flex;
+  @include center;
+  @include form-styling;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
   max-width: 70%;
   height: 400px;
   margin-top: 80px;
   position: relative;
   width: 55%;
   z-index: 2;
-
-
-flex-flow: row wrap;
-
+  flex-flow: row wrap;
 }
 
-
 .trip-card {
-  background-color: #E0E0E0;
-  border: 2px solid #333333;
+  background-color: $light-grey-background;
+  border: 2px solid $dark-grey;
   border-radius: 3px;
-  color: #333333;
+  color: $dark-grey;
   min-height: 150px;
-  max-height: 240px;
+  max-height: 295px;
   margin: 5px 11px;
   padding: 0 13px;
   width: 195px;
@@ -113,23 +101,24 @@ flex-flow: row wrap;
   justify-content: space-evenly;
 }
 
+.your-trips {
+  color: $dark-grey;
+  font-size: 31px;
+  font-weight: $bold-level;
+  text-shadow: 1px 1px;
+}
 
 .layout {
-  border: 2px solid #DAF7A6;
-  background-color: #7FB3D5;
   font-weight: bold;
-  border-radius: 9px;
-  display: grid;
-  margin: 5px;
-  padding: 15px;
+  flex-grow: 3;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .past-trips {
-  border: 2px solid #333333;
+  @include form-styling;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -140,11 +129,9 @@ flex-flow: row wrap;
 }
 
 .present-trips {
-  border: 2px solid #333333;
+  @include form-styling;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -155,11 +142,9 @@ flex-flow: row wrap;
 }
 
 .upcoming-trips {
-  border: 2px solid #333333;
+  @include form-styling;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -170,11 +155,9 @@ flex-flow: row wrap;
 }
 
 .pending-trips {
-  border: 2px solid #333333;
+  @include form-styling;
   font-size: 22px;
-  background-color: #FFEFE4;
-  border-radius: 4px;
-  color: #333333;
+  color: $dark-grey;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -185,14 +168,13 @@ flex-flow: row wrap;
 }
 
 .display-box {
-  display: flex;
-  justify-content: center;
+  @include center;
   width: 100vw;
-  height: 90vh;
+  height: 70vh;
 }
 
 .login-area {
-  padding: 30px;
+  padding: 15px;
   width: 100%;
   display: grid;
   grid-gap: 10px;
@@ -201,4 +183,81 @@ flex-flow: row wrap;
 
 .hidden {
   display: none;
+}
+
+.trip-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-height: 150px;
+}
+
+.cost-of-trip {
+  font-weight: bolder;
+  font-size: 16px;
+  text-align: center;
+}
+
+.trip-input-box {
+  @include center;
+  width: 100vw;
+  height: 70vh;
+}
+
+.trip-entry-form {
+  @include form-styling;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 70%;
+  height: 400px;
+  margin-top: 80px;
+  position: relative;
+  width: 55%;
+  z-index: 2;
+  flex-flow: row wrap;
+}
+
+.trip-login-area {
+  padding: 15px;
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.welcome {
+  text-shadow: 1px 1px;
+  margin-top: 53px;
+}
+
+.scroll {
+  font-style: italic;
+  font-weight: bolder;
+  font-size: 23px;
+  color: #ffb158;
+}
+
+@media only screen and (max-width: 525px) {
+
+  input {
+    width: 10em;
+  }
+
+  button {
+    width: 10em;
+  }
+
+  #destination {
+    width: 10em;
+  }
+  
+  .your-trips {
+    color: #e6e6e6
+  }
 }

@@ -1,78 +1,106 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-
 import ApiFetch from './ApiFetch';
-import domUpdates from './domUpdates';
 import Traveler from './traveler';
 
-console.log('This is the JavaScript entry file - your code begins here.');
+let userID, destinationData;
 
 window.addEventListener('load', onLoad);
-
 
 function onLoad() {
   const loginBtn = document.querySelector('.login-button')
   loginBtn.addEventListener('click', enterLogin)
-
-  // displayPastTrips()
-
+  const bookNewTripBtn = document.querySelector('.new-trip-button')
+  bookNewTripBtn.addEventListener('click', postTrip)
 }
 
 function enterLogin() {
   const username = document.getElementById('username').value
   const password = document.getElementById('password').value
-  const loginValue = parseInt(username.match(/\d+/gi).pop())
-  console.log("VALUE", loginValue)
+  userID = parseInt(username.match(/\d+/gi).pop())
   const removeLogin = document.querySelector('.entry-form')
+  const addForm = document.querySelector('.trip-entry-form')
+  const text = document.querySelector('.scroll')
   if (username.includes('traveler') && (username.split('traveler')[1] < 51 && username.split('traveler')[1] > 0) && password === 'travel2020') {
     console.log(username + ' is logged in!!!')
     removeLogin.classList.add('hidden')
-    getData(loginValue)
+    addForm.classList.remove('hidden')
+    addForm.classList.add('flex')
+    text.classList.remove('hidden')
+    getData(userID)
   } else {
     alert("WRONG PASSWORD")
   }
-
 }
-
-//get the value of username
-
-// var str = "traveler50";
-// var res = str.match(/\d+/gi);
-
 
 function getData(loginValue) {
   const api = new ApiFetch();
   const tripData = api.getTripsData()
   const travelerData = api.getTravelersData()
-  console.log("TD", travelerData)
   const destinationData = api.getDestinationsData();
   function _createTraveler(data) {
-    createTraveler(data, loginValue)
+    return createTraveler(data, loginValue)
   }
+  Promise.all([travelerData, tripData, destinationData])
+    .then(data => data = {
+      travelerData: data[0].travelers,
+      tripData: data[1].trips,
+      destinationData: data[2].destinations
+    })
+    .then(_createTraveler)
+    .then(displayPastHTML)
+    .catch(error => console.log(error));
 
-let traveler = Promise.all([travelerData, tripData, destinationData])
-  .then(data => data = {
-    travelerData: data[0].travelers,
-    tripData: data[1].trips,
-    destinationData: data[2].destinations
+  Promise.all([travelerData, tripData, destinationData])
+      .then(data => data = {
+        travelerData: data[0].travelers,
+        tripData: data[1].trips,
+        destinationData: data[2].destinations
+      })
+      .then(fillDestinations)
+      .catch(error => console.log(error));
+}
+
+function fillDestinations(data) {
+  destinationData = data.destinationData
+  data.destinationData.forEach(destination => {
+    let destinationElement = document.getElementById('destination')
+    destinationElement.innerHTML += `
+    <option value="${destination.id}">${destination.destination}</option>
+    `
   })
-  .then(_createTraveler)
-  // .then(displayPastTrips)
+}
+
+function postTrip() {
+  const api = new ApiFetch();
+  const form = document.querySelector('.trip-input-box');
+  const tripDetails = formatForPost();
+  api.postTripRequest(tripDetails)
+    .then(costOfRequestedTrip)
+    .catch(error => console.log(error));
+}
+
+function formatForPost() {
+  const username = document.getElementById('username').value;
+  const destinationID = Number(document.getElementById('destination').value);
+  const numTravelers = Number(document.getElementById('num-travelers').value);
+  const travelDate = document.getElementById('date').value
+  const duration = Number(document.getElementById('duration').value);
+  return {
+    "id": Date.now(),
+    "userID": userID,
+    "destinationID": destinationID,
+    "travelers": numTravelers,
+    "date": travelDate,
+    "duration": duration,
+    "status": "pending",
+    "suggestedActivities": []
   }
+}
 
 function createTraveler(data, loginValue) {
-  console.log("DATA", data)
   let userid = loginValue
-  console.log(data.travelerData)
-  console.log(userid)
   let name = data.travelerData.find(traveler => {
-
     return traveler.id === userid
   }).name
   let trips = data.tripData.filter(trip => {
@@ -82,112 +110,111 @@ function createTraveler(data, loginValue) {
     let destinationObj = data.destinationData.find(destination => {
       return destination.id === trip.destinationID
     })
-    // console.log(trip, destinationObj)
+    trip.img = destinationObj.image
     trip.destinationName = destinationObj.destination
+    trip.estimatedLodgingCostPerDay = destinationObj.estimatedLodgingCostPerDay
+    trip.estimatedFlightCostPerPerson = destinationObj.estimatedFlightCostPerPerson
     return trip
   })
-  console.log("DEST", data.destinationData)
-  console.log("PROCESSED", processedTrips)
-
-
-//return array of trip objects for user three
-//each trip object needs the keys above
-  return new Traveler(name, trips)
+  return new Traveler(name, processedTrips)
 }
 
+function displayPastHTML(traveler) {
+  let pastTrips = traveler.pastTrips();
+  let displayPastTrips = document.querySelector('.past-trips')
+  pastTrips.forEach(trip => {
+    displayPastTrips.innerHTML +=
+    `<div class="trip-card">
+    <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>
+    </div>`
+  })
+  displayPresentHTML(traveler)
+}
 
+function displayPresentHTML(traveler) {
+  let presentTrips = traveler.presentTrips();
+  let displayPresentTrips = document.querySelector('.present-trips')
+  presentTrips.forEach(trip => {
+    displayPresentTrips.innerHTML +=
+    `<div class="trip-card">
+    <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>
+    </div>`
+  })
+  displayPendingHTML(traveler)
+}
 
+function displayPendingHTML(traveler) {
+  let pendingTrips = traveler.pendingTrips();
+  let displayPendingTrips = document.querySelector('.pending-trips')
+  pendingTrips.forEach(trip => {
+    displayPendingTrips.innerHTML +=
+    ` <div class="trip-card">
+    <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>
+    </div`
+  })
+  displayUpcomingHTML(traveler)
+}
 
-// traveler.pastAndUpcomingTrips()
+function displayUpcomingHTML(traveler) {
+  let upcomingTrips = traveler.upcomingTrips();
+  let displayUpcomingTrips = document.querySelector('.upcoming-trips')
+  upcomingTrips.forEach(trip => {
+    displayUpcomingTrips.innerHTML +=
+    `<div class="trip-card">
+    <p>${trip.destinationName}</p>
+    <div class="image-container">
+    <img src="${trip.img}" class="image">
+    </div>
+    <p>Date: ${trip.date}</p>
+    <p class="duration">${trip.duration} days</p>
+    </div>
+    `
+  })
+  let greeting = document.querySelector('.welcome')
+  let moneySpent = document.querySelector('.amount-spent')
+  greeting.classList.remove('hidden')
+  moneySpent.classList.remove('hidden')
+  greeting.innerHTML = `Welcome, ${traveler.name}!`
+  moneySpent.innerHTML = `Amount spent on travel this year: $${costOfTripsThisYear(traveler)}`
+}
 
+function costOfTripsThisYear(traveler) {
+  let thisYearsTrips = traveler.tripsThisYear()
+  return thisYearsTrips.reduce((acc, trip) => {
+    acc += trip.duration * trip.estimatedLodgingCostPerDay
+    acc += trip.travelers * trip.estimatedFlightCostPerPerson
+    return acc
+  }, 0)
+}
 
-
-// function combineData(data) {
-//   console.log("DATA", data)
-//   //image, duration, date, destinationName, userID
-//   //return type will be an array of objects
-//   //each object is an object literal with the keys on 57
-//   return data
-// }
-
-// function getUserTrips(data) {
-//   console.log("1", data.tripData)
-//   console.log('2', data.travelerData)
-//   console.log('3', data.destinationData)
-//   // console.log("HELLO", tripData[1].trips)
-//   // console.log("HELLO2", userData[0].destinations)
-//   //match the userID to the loginID
-//   const loggedInUser = 3;
-//   const tripsForUser = data.tripData.filter(user => {
-//     // console.log(user)
-//     return user.userID === loggedInUser
-//   })
-//   console.log("MATCH", tripsForUser)
-//   return tripsForUser
-// }
-
-//   //image, duration, date, destinationName, userID
-//   //return type will be an array of objects
-//   //each object is an object literal with the keys on 57
-//   return data
-// }
-
-// function pendingTrips(data) {
-//   console.log('pending', data)
-//   const pendingTrips = data.filter(user => {
-//     return user.status === 'pending'
-//   })
-//   console.log("PENDINGTRIPS", pendingTrips)
-//   return pendingTrips
-// }
-// const currentDay = Date.now()
-
-
-// function presentTrips(data) {
-//   console.log("PRESENT", data)
-//   const today = data.filter(user => {
-//     return user.date.includes(currentDay)
-//   })
-//   console.log('presentTrips', today)
-//   return today
-// }
-
-// function getDate(data) {
-//   console.log("Obj", data)
-//
-//   const day = data.reduce((acc, trip) => {
-//     const pastDay = Date.parse(trip.date)
-//     if (currentDay < pastDay) {
-//       acc.upcoming.push(trip)
-//     } else {
-//       acc.past.push(trip)
-//     }
-//     return acc
-//   }, {'past': [], 'upcoming': []})
-//   return day;
-// }
-
-
-// function getId() {
-//   const username = document.getElementById('username').value;
-//   if (username.includes('traveler')) {
-//     const travelerID = Number(username.split('traveler')[1]);
-//     return Number(travelerID);
-//   }
-// }
-
-// function display(traveler) {
-//   domUpdates.displayWelcome(traveler)
-// }
-
-// function displayPastTrips() {
-//   // console.log("TIRED")
-//   console.log("BEtTer", processedTrips)
-//   let displayPastTrips = document.querySelector('.past-trips-card')
-//   displayPastTrips.innerHTML +=
-//   ` <p>${data.past[0].destinationID}</p>
-//     <img>IMG</img>
-//     <p>${data.past[0].date}</p>
-//     <p>Duration</p>`
-//     return displayPastTrips
-// }
+function costOfRequestedTrip(apiResponse) {
+  let destinationObj = destinationData.find(destination => {
+    return destination.id === apiResponse.newResource.destinationID
+  })
+  let duration = apiResponse.newResource.duration
+  let estimatedLodgingCostPerDay = destinationObj.estimatedLodgingCostPerDay
+  let travelers = apiResponse.newResource.travelers
+  let estimatedFlightCostPerPerson = destinationObj.estimatedFlightCostPerPerson
+  let costOfTripNoFee = duration * estimatedLodgingCostPerDay + travelers * estimatedFlightCostPerPerson
+  let agentFee = costOfTripNoFee * .10
+  let totalCost = (costOfTripNoFee + agentFee).toFixed(2)
+  let estimatedTripCost = document.querySelector('.cost-of-trip')
+  estimatedTripCost.classList.remove('hidden')
+  estimatedTripCost.innerHTML = `***Estimated Trip Cost: $${totalCost}***`
+  return totalCost
+}

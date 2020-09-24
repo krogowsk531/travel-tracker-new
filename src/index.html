@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/scss" href="./css/base.scss">
+    <link rel="stylesheet" type="text/css" href="./cssnormalize-min.css">
     <title>Webpack Starter Kit</title>
   </head>
   <body>
-
     <header>
     <h1>Travel Tracker</h1>
-    <p class="amount-spent">Amount spent on travel this year: $1000</p>
+    <p class="amount-spent hidden">Amount spent on travel this year: $1000</p>
     </header>
+    <section>
+      <h2 class="welcome hidden">Welcome Scott!</h2>
+    </section>
     <article class="display-box">
       <form class="entry-form">
         <section class="login-area">
@@ -20,82 +24,38 @@
         </section>
         <button class="login-button" type="button">Log In</button>
       </form>
-    </article>
-    <article class="trip-input-box hidden">
-      <form class="entry-form">
-        <section class="login-area">
+      <form class="trip-entry-form hidden">
+        <section class="trip-login-area">
+          <p class="cost-of-trip hidden">***Estimated Trip Cost: $1000***</p>
           <label for="date">Date:</label>
-          <input id="date">
+          <input id="date" placeholder="yyyy/mm/dd">
           <label for="duration">Duration:</label>
           <input id="duration">
           <label for="num-travelers">Number of Travelers:</label>
           <input id="num-travelers">
           <label for="destination">Destination:</label>
-          <!-- <input id="destination"> -->
-          <select name="cars" id="cars">
-            <option value="lima">Lima, Peru</option>
-            <option value="stockholm">Stockholm, Swedwen</option>
-            <option value="sydney">Sydney, Austrailia</option>
-            <option value="cartagena">Cartagena, Columbia</option>
-            <option value="madrid">Madrid, Spain</option>
-            <option value="jakarta">Jakarta, Indonesia</option>
-            <option value="paris">Paris, France</option>
-            <option value="tokyo">Tokyo, Japan</option>
-            <option value="amsterdam">Amsterdam, Netherlands</option>
-            <option value="toronto">Toronto, Japan</option>
-
-            <option value="mikonos">Mikonos, Greece</option>
-            <option value="wellington">Wellington, New Zealand</option>
-            <option value="petersburg">St. Petersburg, Russia</option>
-            <option value="marrakesh">Marrakesh, Morocco</option>
-            <option value="manila">Manila, Philippines</option>
-            <option value="bangkok">Bangkok, Thailand</option>
-            <option value="jaipur">Jaipur, India</option>
-            <option value="cape">Cape Town, South Africa</option>
-            <option value="quito">Quito, Ecuador</option>
-            <option value="miami">Miami, Florida</option>
-
-            <option value="tulum">Tulum, Mexico</option>
-            <option value="rome">Rome, Italy</option>
-            <option value="copenhagen">Copenhagen, Denmark</option>
-            <option value="vilnius">Vilnius, Lithuania</option>
-            <option value="york">New York, New York</option>
-            <option value="london">London, England</option>
-            <option value="francisco">San Francisco, California</option>
-            <option value="juan">San Juan, Puerto Rico</option>
-            <option value="willemstad">Willemstad, Curaçao</option>
-            <option value="antananarivo">Antananarivo, Madagascar</option>
-
+          <select name="city" id="destination">
           </select>
         </section>
-        <button class="login-button" type="button">Log In</button>
+        <button class="new-trip-button" type="button">Book New Trip</button>
       </form>
     </article>
     <main>
-      <section class="welcome">
-        <h2>Welcome Scott!</h2>
-      </section>
       <section>
-        <h3>Your Trips</h3>
+        <p class="your-trips">Your Trips</p>
+        <p class="scroll hidden">Scroll right in order to see all trips!</p>
         <section class="present-trips layout">Present Trips
-          <article class="trip-card present-trips-card">TRIP</article>
+          <section class="trip-container">
+        </section>
         </section>
         <section class="upcoming-trips layout">Upcoming Trips
-          <article class="trip-card upcoming-trips-card">TRIP</article>
         </section>
           <section class="past-trips layout">Past Trips
-            <article class="trip-card past-trips-card">
-
-            </article>
-          </section>
+        </section>
           <section class="pending-trips layout">Pending Trips
-          <article class="trip-card pending-trips-card">TRIP</article>
-          </section>
+        </section>
       </section>
     </main>
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
-
     <script src= "../src/scripts.js"></script>
   </body>
 </html>
