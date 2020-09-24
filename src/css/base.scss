@@ -231,3 +231,38 @@ p {
   font-size: 16px;
   text-align: center;
 }
+
+.trip-input-box {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 70vh;
+}
+
+.trip-entry-form {
+  border: 2px solid $dark-grey;
+  background-color: $light-peach;
+  border-radius: $standard-border-radius;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 70%;
+  height: 400px;
+  margin-top: 80px;
+  position: relative;
+  width: 55%;
+  z-index: 2;
+  flex-flow: row wrap;
+}
+
+.trip-login-area {
+  padding: 15px;
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+}

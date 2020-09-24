@@ -31,9 +31,13 @@ function enterLogin() {
   userID = parseInt(username.match(/\d+/gi).pop())
   // console.log("VALUE", loginValue)
   const removeLogin = document.querySelector('.entry-form')
+  const addForm = document.querySelector('.trip-entry-form')
+  // addForm.classList.add('hidden')
   if (username.includes('traveler') && (username.split('traveler')[1] < 51 && username.split('traveler')[1] > 0) && password === 'travel2020') {
     console.log(username + ' is logged in!!!')
     removeLogin.classList.add('hidden')
+    addForm.classList.remove('hidden')
+    addForm.classList.add('flex')
     getData(userID)
   } else {
     alert("WRONG PASSWORD")
