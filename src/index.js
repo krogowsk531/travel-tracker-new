@@ -33,6 +33,11 @@ function enterLogin() {
   }
 }
 
+
+
+
+
+
 function getData(loginValue) {
   const api = new ApiFetch();
   const tripData = api.getTripsData()
